@@ -1,0 +1,163 @@
+\documentclass{article}
+\usepackage{sagetex}
+
+\usepackage{array}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{environ}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{rotating}
+\usepackage{tikz}
+\usepackage{url}
+\usepackage{xspace}
+\usepackage{dsfont}
+\usepackage{cancel}
+\usepackage{xargs}
+\usepackage{color}
+\usepackage{tabularx}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+\newcommand{\E}[2][]{\ensuremath{\mathbb{E}_{#1}\left[#2\right]}}
+\newcommand{\V}[2][]{\ensuremath{\mathbb{V}_{#1}\left[#2\right]}}
+
+\title{Probability in Sage with \LaTeX{}}
+\author{Shannon Rae Zylstra}
+\date{May 22-23, 2013}
+
+\begin{document}
+
+\maketitle % typeset it?
+
+\begin{abstract}
+The selection of probability distributions and statistical calculations follows the syllabus of the
+first actuarial exam, which is published by the Society of Actuaries (SOA) and which constitutes
+a sufficiently comprehensive and foundational treatment of probability.
+\end{abstract}
+
+\newpage
+
+\vfill
+\tableofcontents
+\clearpage
+
+\section{Introduction}
+For my project, I will define a new class of random variable.
+This random variable object will follow a given probability distribution and will allow users to perform various statistical functions.
+Supported distributions and functions were chosen from the Exam P/1 Syllabus. \\
+
+\subsection{List of Supported Distributions}
+\begin{itemize}
+\item{Discrete Distributions}
+    \begin{itemize}
+     \item Bernoulli
+     \item Binomial
+     \item Hypergeometric
+     \item Negative Binomial
+     \item Geometric
+     \item Poisson
+    \end{itemize}
+\item{Continuous Distributions}
+    \begin{itemize}
+     \item Exponential
+     \item Gamma
+     \item Normal
+     \item Uniform
+    \end{itemize}
+\end{itemize}
+\subsection{List of Supported Functions}
+\begin{itemize}
+    \item \text{Probability Function}
+    \begin{itemize}
+        \item \text{Probability Mass Function} $ p_X(x) $
+        \item \text{Probability Density Function} $ f_X(x) $
+    \end{itemize}
+    \item \text{Cumulative Distribution Function} $ F_X(x) $
+    \item \text{Expectation} $ \E{X} $
+    \item \text{Variance} $ \V{X} $
+\end{itemize}
+
+\section{Example}
+\subsection{Binomial}
+\subsubsection{Notation}
+Unfortunately for students, the notation used to represent a given parametric distribution
+can vary significantly. To help students avoid the confusion that can arise,
+the notation() function will return the LaTeX representation of the most widely
+accepted choice of notation for that distribution (with preference given to the
+representations that are the most widely used in  actuarial communities). \\
+\subsubsection{Probability Function}
+\subsubsubsection{Probability Mass Function}
+The pmf(x) function will evaulate the pmf of the random variable at x.
+\subsubsubsection{Probability Density Function}
+The pdf(x) function will evaulate the pdf of the random variable at x.
+\subsubsection{Cumulative Distribution Function}
+The cdf(x) function will evaulate the cdf of the random variable at x.
+\subsubsection{Expectation}
+The expectation() function will evaulate the expectation of the random variable.
+\subsubsection{Variance}
+The variance() function will evaulate the variance of the random variable.
+
+\section{Using Sage}
+
+Let us define a new class:
+
+\begin{sageblock}
+    from sage.rings.arith import binomial
+    import scipy
+    from scipy.stats import binom
+
+    class Binomial():
+        def __init__(self, n, p):
+            self._n = n
+            self._p = p
+            self._rv = binom(n, p)
+        def n(self):
+            return self._n
+        def p(self):
+            return self._p
+        def rv(self):
+            return self._rv
+        def pmf(self, x):
+            rv = self.rv()
+            return rv.pmf(x)
+        def cdf(self, x):
+            rv = self.rv()
+            return rv.cdf(x)
+        def expectation(self):
+            n = self.n()
+            p = self.p()
+            return binom.expect(args=(n,p))
+        def variance(self):
+            n = self.n()
+            p = self.p()
+            return binom.var(n, p)
+\end{sageblock}
+
+Now, let us do something cool with it!
+
+\begin{sageblock}
+    D = [0,1,2,3,4,5]
+    P = [Binomial(5,0.5).pmf(0),
+         Binomial(5,0.5).pmf(1),
+         Binomial(5,0.5).pmf(2),
+         Binomial(5,0.5).pmf(3),
+         Binomial(5,0.5).pmf(4),
+         Binomial(5,0.5).pmf(5)]
+    pmf = zip(D,P)
+    n = len(D)
+    R = range(n)
+    G = Graphics()
+    for k in R:
+       G += line([(D[k],0),(D[k],P[k])])
+    G += points(pmf,size=50)
+\end{sageblock}
+
+Here is a plot of the pmf:
+
+$$\sageplot[scale=.25]{plot(G,ymin=0)}$$
+
+\end{document}
