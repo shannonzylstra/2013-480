@@ -6,11 +6,8 @@ Math 480 during Spring 2013 at University of Washington.
 - Office Hours: Tuesday 12:30 - 2
 
 - [SageMath Cloud](https://cloud.sagemath.com) -- use the worksheets from class and Sage here.
-<<<<<<< HEAD
-=======
 
 - [Final projects](final_projects.md)
->>>>>>> class/master
 
 # Screencasts of Lectures
 - [Lecture 3](http://youtu.be/YopZzNzwnFw)
@@ -30,13 +27,9 @@ Math 480 during Spring 2013 at University of Washington.
 - [Lecture 18 (May 10, 2013) - LaTeX Documents](http://youtu.be/IhwMbdIGUxM)
 - [Lecture 19 (May 13, 2013) - LaTeX and MathJax](http://youtu.be/QlbpulzxT5I)
 - [Lecture 20 (May 15, 2013) - More MathJax, Final Project Organization](http://youtu.be/ElX__lasto0)
-<<<<<<< HEAD
-- [Lecture 21 (May 17, 2013) - Sage Development in cloud.sagemath.com](http://youtu.be/IrMsl3lzNE8)
-=======
 - [Lecture 21 (May 17, 2013) - Sage Development in cloud.sagemath.com](http://youtu.be/IrMsl3lzNE8)
 - [Lecture 22 (May 20, 2013) - Hidden Markov Models in Sage](http://youtu.be/0yv8EByYf3E)
 - Lecture 23 failed to record due to Google Plus Live Streams being buggy (so many recent changes!).
 - [Lecture 24 (May 24, 2013) - Plotting 2d graphics in Sage](http://youtu.be/RKLzhPAzcNg)
 - [Lecture 25 (May 29, 2013) - Project organization; building Sage; cloud.sagemath worksheet tricks](http://youtu.be/IS5QQeFXwt8)
 - [Lecture 26 (May 31, 2013) - Mainly 3d graphics in Sage](http://youtu.be/rdnDK4iC2V0)
->>>>>>> class/master
